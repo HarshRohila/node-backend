@@ -19,3 +19,27 @@ exports.createUser = (req, res) => {
 		});
 	});
 };
+
+exports.getAllUsers = (req, res) => {
+	User.find({}, (err, users) => {
+        if (err) {
+            res.send(err);
+        }
+
+        const serialized = UserSerializer.serialize(users);
+		res.json(serialized);
+    });
+}
+
+exports.deleteUser = (req, res) => {
+	console.log(req.params.userId);
+	User.deleteOne({
+        _id: req.params.userId
+    }, (err) => {
+        if (err) {
+            res.send(err);
+		}
+
+        res.status(204).json({});
+    });
+}

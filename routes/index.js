@@ -4,13 +4,11 @@ import express from 'express';
 export default (app) => {
 	const router = express.Router();
     router.route('/users')
-        // .get(notebook.getAllNotes)
-        .post(user.createUser);
+        .get(user.getAllUsers)
+		.post(user.createUser);
 
-    // app.route('/notes/:noteId')
-    //     .get(notebook.getNote)
-    //     .put(notebook.updateNote)
-	//     .delete(notebook.deleteNote);
+	router.route('/users/:userId')
+	    .delete(user.deleteUser);
 	
 	app.use('/api/v1', router);
 };
