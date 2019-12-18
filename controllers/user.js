@@ -10,18 +10,12 @@ const UserDeserializer = new JSONAPIserializer.Deserializer();
 exports.createUser = (req, res) => {
 	UserDeserializer.deserialize(req.body, (err, json) => {
 		const newUser = new User(json);
-		//save to database
 		console.log(newUser);
-		const serialized = UserSerializer.serialize(newUser);
-		res.json(serialized);
-	});
-    
-	
-    // newUser.save((err, user) => {
-    //     if (err) {
-    //         res.send(err);
-    //     }
 
-    //     res.json(user);
-    // });
+		newUser.save((err, user) => {
+			if (err) res.send(err);
+			const serialized = UserSerializer.serialize(user);
+			res.json(serialized);
+		});
+	});
 };

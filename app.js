@@ -11,7 +11,9 @@ const app = express();
     * Connect to the database
     */
 
-// mongoose.connect('mongodb://localhost');
+mongoose.connect('mongodb://127.0.0.1:27017/test', { useNewUrlParser: true, useUnifiedTopology: true }, (err)  => {
+	if (err) console.log(err);
+});
 
 /**
     * Middleware
